@@ -1,0 +1,35 @@
+# Exercício - Função contador
+
+# Crie um programa que contenha a função contador( ) que receba 3 parâmetros: início, fim, e passo do contador;
+# Realize a contagem de:
+# • 1 a 20 de 1 em 1;
+# • 20 a 0 de 2 em 2;
+# • 0 a 105 de 5 em 5;
+# • 75 a 15 de 5 em 5;
+# DICA: Para gerar um delay, utilize a biblioteca “time”;
+
+import time
+
+def contador(ini, fm, pas):
+    for i in range(ini, fm, pas) :
+        print(i)
+        time.sleep(0.5)
+
+while (True) :
+    print("\n--- Contador de Números ---")
+    inicio = int(input("Início: "))
+    fim = int(input("Fim: "))
+    passo = int(input("Passo: "))
+    print("\n")
+
+    if (inicio > fim) :
+        fim -= passo
+        passo = passo - (passo * 2)
+        contador(inicio, fim, passo)
+        break
+    elif (inicio < fim) :
+        fim += passo
+        contador(inicio, fim, passo)
+        break
+    else :
+        print("Burro")
