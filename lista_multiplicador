@@ -1,0 +1,15 @@
+import random
+
+lista1 = []
+lista2 = []
+lista3 = []
+
+for i in range(random.randint(5, 15)):      #Define tamanho aleatório entre 5 e 15
+    lista1.append(random.randint(1, 9)) 
+    lista2.append(random.randint(1, 9))
+    lista3.append(lista1[i] * lista2[i])    #Multiplicação dos valores da Lista1 com Lista2
+
+print('\nLista 1:', lista1, 
+      '\nLista 2:', lista2, 
+      '\nLista 3:', lista3, 
+      '\n\nSoma dos valores de Lista 3:', sum(lista3))
