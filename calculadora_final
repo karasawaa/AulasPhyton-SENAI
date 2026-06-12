@@ -1,0 +1,89 @@
+import time
+
+num1 = 0
+num2 = 0
+result = 0
+acao = 0
+i = 0
+continuar = ""
+
+def yn(cont) :
+    while (cont != "y") :
+
+        if (cont == "n") :
+            break 
+        elif (cont == "y") :
+            i = i + 1
+            break
+        else : 
+            print("\nDigite uma opção válida seu IMBECIL")
+
+print("------Calculadora------")
+while (True) :
+    if (acao == 1) :    #Adição
+        result = num1 + num2
+        print(f"\nResultado: {result}")
+        
+        continuar = str(input("\nDeseja continuar? (Y/N): "))
+        yn(continuar)
+
+    elif (acao == 2) :  #Subtração
+        result = num1 - num2
+        print(f"\nResultado: {result}")
+
+        continuar = str(input("\nDeseja continuar? (Y/N): "))
+        yn(continuar)
+
+    elif (acao == 3) :  #Multiplicação
+        result = num1 * num2
+        print(f"\nResultado: {result}")
+
+        continuar = str(input("\nDeseja continuar? (Y/N): "))
+        yn(continuar)
+
+    elif (acao == 4) :  #Divisão
+        if (num2 == 0) :
+                print("Não divide por 0 ANIMAL")
+        else :
+            result = num1 / num2
+            print(f"\nResultado: {result}")
+
+        continuar = str(input("\nDeseja continuar? (Y/N): "))
+        yn(continuar)
+
+    elif (acao == 5) :  #Sair
+        break
+
+    if (continuar == "n") :
+        break
+
+    while (True) :    
+        try:
+            continuar = ""
+            acao = int(input("\n1- Adição " \
+                            "\n2- Subtração " \
+                            "\n3- Multiplicação " \
+                            "\n4- Divisão " \
+                            "\n5- Sair " \
+                            "\n\nSelecione sua opção: "))
+
+            if acao < 1 or acao > 5:
+                raise ValueError
+            while (True) :
+                try:
+                    if (i == 0) :  
+                        num1 = int(input("1º Número: "))
+                        num2 = int(input("2º Número: "))
+                        break
+                    else :  
+                        num1 = result
+                        print (f"1º Número: {num1}")
+                        num2 = int(input("2º Número: "))
+                        break
+                except ValueError:
+                    print("\nDigita um valor correto OTARIO")
+                    time.sleep(1)
+            break
+        except ValueError:
+            print("\nDigita um valor correto OTARIO")
+            time.sleep(1)
