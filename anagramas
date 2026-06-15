@@ -1,0 +1,40 @@
+import random 
+
+pontuacao = 100
+
+with open("palavras.txt", "r", encoding="utf-8") as arquivo:
+    linhas = arquivo.readlines()
+
+print("--- Jogo de Advinhação de Anagramas ---")
+dificuldade = input('Digite a dificuldade desejada (1, 2 ou 3): ')
+desconto = input('Digite quantos pontos serão descontados a cada erro: ')
+
+while True :
+    if dificuldade in ["1", "2", "3"]:
+        num_linha = int(dificuldade) - 1 #define a linha que vai puxar a palavra
+
+        lista = linhas[num_linha].strip().split(",")
+        palavra = random.choice(lista).strip() #seleciona uma palvra da lista
+
+        letras = list(palavra) #a palavra selecionada vira uma "lista"
+        random.shuffle(letras)
+        palavra_embaralhada = "".join(letras)
+        print(f"O anagrama é: {palavra_embaralhada}")
+
+
+        while pontuacao > 0:
+            chute = input("Advinhe a palavra original: ").strip()
+            if chute.lower() == palavra.lower():
+                print(f"Parabéns! Pontuação = {pontuacao}.")
+                break
+            else:
+                pontuacao -= int(desconto)
+                
+                if pontuacao > 0:
+                    print(f"Errou! Perdeu {desconto} pontos. Pontuação restante: {pontuacao} \nTente novamente!")
+                else:
+                    print(f"Perdeu! A palavra correta era: {palavra}")
+        break
+    else : 
+        print("Escolha uma opção válida")
+        dificuldade = input('Digite a dificuldade desejada (1, 2 ou 3): ')
