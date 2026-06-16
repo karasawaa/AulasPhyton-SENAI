@@ -1,0 +1,88 @@
+cardapio = {
+    "comidas":[
+        {"nome": "Turu", "descricao": "Porção de turu. Serve 5 pessoas", "valor": 67.67},
+        {"nome": "Camarão", "descricao": "Porção de camarões. Serve 2 pessoas", "valor": 29.99}, 
+        {"nome": "Risoto", "descricao": "Risoto de frango. Serve 4 pessoas", "valor": 26.89},
+        {"nome": "Ostra", "descricao": "Porção de ostras. Serve 3 pessoas", "valor": 36.99},
+        {"nome": "Peixes", "descricao": "Anchova, Atum, Tilápia, Bacalhau. Serve 3 pessoas", "valor": 33.98}
+    ],
+    "bebidas":[
+        {"nome": "Refri Lata", "descricao": "Guaraná, Coca, Tubaina, Fanta, Sprite", "valor": 6.50},
+        {"nome": "Refri 1 Litro", "descricao": "Guaraná, Coca, Fanta", "valor": 9.30},   
+        {"nome": "Suco 500ml", "descricao": "Uva, Laranja, Limão, Abacaxi", "valor": 12.99},
+        {"nome": "Suco 2 Litros", "descricao": "Uva, Laranja, Limão, Abacaxi", "valor": 29.98},
+        {"nome": "Alcoolicos Lata", "descricao": "Corona, Brahma, Stella, Skol", "valor": 9.99},
+        {"nome": "Alcoolicos Litro", "descricao": "Corona, Brahma, Stella, Skol", "valor": 14.97}
+    ]
+}
+
+carrinho = [] 
+total = 0.0  
+
+print("<<------ Restaurante Maresia ------>>")
+while True:
+    print("1-Cardápio \n2-Sair")
+    escolha = input("Selecione o que deseja fazer: ")
+
+    if escolha in ["1", "2"]:
+        if escolha == "1" :
+            print("------------------ Comidas ------------------")
+            for item in cardapio["comidas"]:
+                print(f"            - - -  {item['nome']}  - - -")
+                print(f"{item['descricao']}")
+                print(f"                                    R$ {item['valor']:.2f}\n")
+
+            print("------------------ Bebidas ------------------")
+            for item in cardapio["bebidas"]:
+                print(f"            - - -  {item['nome']}  - - -")
+                print(f"{item['descricao']}")
+                print(f"                                    R$ {item['valor']:.2f}\n")   
+
+
+            print("\n--- Faça seu Pedido ---")
+
+            while True:
+                pedido = input("Digite o NOME da comida ou bebida (ou 'fim' para cancelar): ")
+
+                if pedido.lower() == "fim":
+                    break
+
+                encontrou = False
+
+                for item in cardapio["comidas"]:
+                    if pedido.lower() == item["nome"].lower():
+                        carrinho.append(item)
+                        total += item["valor"]
+                        print(f"{item['nome']} adicionado. (R$ {item['valor']:.2f})\n")
+                        encontrou = True
+                        break 
+                
+                if not encontrou:
+                    for item in cardapio["bebidas"]:
+                        if pedido.lower() == item["nome"].lower():
+                            carrinho.append(item)
+                            total += item["valor"]
+                            print(f"{item['nome']} adicionado. (R$ {item['valor']:.2f})\n")
+                            encontrou = True
+                            break 
+                
+                if not encontrou:
+                    print("\nItem não encontrado no cardápio\n")
+
+            if len(carrinho) > 0:
+                print("\n<<--- Resumo da Conta --->>")
+                for item in carrinho:
+                    print(f"- {item['nome']}: R$ {item['valor']:.2f}")
+                print("----------------------------")
+                print(f"**Total a pagar: R$ {total:.2f}**\n")
+            else:
+                print("\nVocê não escolheu nenhum item. Pedido cancelado.\n") 
+
+        elif escolha == "2" and total <= 0:
+            print("Saindo...")
+            break
+        elif escolha == "2" and total > 0:
+            print("\nObrigado!! Volte sempre\n")
+            break
+    else :
+        print("\nEscolha uma opção válida\n")
